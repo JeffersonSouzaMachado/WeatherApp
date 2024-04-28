@@ -9,6 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private lazy var customView: UIView = {
+        let view = UIView(frame: .zero)
+       view.translatesAutoresizingMaskIntoConstraints = false
+       view.backgroundColor = .yellow
+        return view
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(
@@ -21,25 +29,28 @@ class ViewController: UIViewController {
     
     
     private func setupView(){
+        print("inside setupView")
         view.backgroundColor = .red
-        
-        
-        let customView = UIView(frame: .zero)
-        customView.translatesAutoresizingMaskIntoConstraints = false
-        customView.backgroundColor = .yellow
-     
-        view.addSubview(
-            customView
-        )
-        
+         
+        setHierarchy()
+        setConstraint()
+    }
+    
+    private func setHierarchy(){
+        print("inside setHierarchy")
+        view.addSubview(customView)
+    }
+    
+    
+    
+    private func setConstraint(){
+        print("inside setConstraint")
         NSLayoutConstraint.activate([
             customView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
             customView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
             customView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
             customView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
         ])
-        
-       
     }
     
     
